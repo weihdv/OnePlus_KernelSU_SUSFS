@@ -2860,6 +2860,11 @@ runs:
 
         make LD="$COMMON_KERNEL_FOLDER/ld-wrapper" HOSTLD="$COMMON_KERNEL_FOLDER/ld-wrapper" O="$OUT" olddefconfig
 
+        # 开启 KPM 内核模块支持
+        echo "CONFIG_KPM=y" >> "$OUT/.config"
+        echo "CONFIG_KALLSYMS=y" >> "$OUT/.config"
+        echo "CONFIG_KALLSYMS_ALL=y" >> "$OUT/.config"
+
         # ── 开机必需配置守卫 ─────────────────────────────────────────────────────
         # 只有 DEVTMPFS 是真正致命的：缺失会让 ueventd 建不出设备节点，
         # first-stage mount 失败卡第一屏。在编译前直接失败，比刷成砖再排查便宜。
